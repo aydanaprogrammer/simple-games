@@ -1,0 +1,65 @@
+def find_num(num=10):
+    print("Let's play the game 'Find The Number' ")
+    import random
+    def findnum_user(num=10):
+        while num:
+                  number = random.randint(1, num)
+                  attempts = 0
+                  print(f"I am thinking of number between 1 and {num}. Can you guess it? ")
+                 
+                  while True:
+                      guess = int(input(">>>"))
+                      attempts += 1
+                      if guess > number:
+                         print("Wrong, it is smaller. Try again! ")
+                      elif guess < number:
+                         print("Wrong, it is larger. Try again!")
+                      else:
+                          break
+                  if attempts == 1:
+                        print(f"You found it. it was number {number}. "
+                              f"You found it in your first attempt!")
+                  else:    
+                        print(f"You found it. it was number {number}. "
+                              f"You found it in {attempts} attempts") 
+                  return attempts 
+    def findnum_computer(num=10):
+        print()
+        print(f"Think of any number between 1 and {num}. I will guess. ")
+        print()
+        print(input("If you are done press any key."))
+        max = num
+        min = 1
+        attempts = 0
+        while True:
+            if max == min:
+                guess = max
+            else:
+                guess = random.randint(min, max)
+            n = input(f"You are thinking of number {guess}. Right(r), larger(+), smaller(-): ")
+            attempts += 1
+            if n == '-':
+                max = guess - 1
+            elif n == '+':
+                min = guess +1
+            else:
+                break
+        print(f"I found it in {attempts} attempt(s)")
+        return attempts
+    
+    def play(num=10):
+            user = findnum_user(num)
+            pc = findnum_computer(num)
+            if user > pc:
+                print("I won!")
+            elif user < pc :
+                print("You won!")
+            else:
+                print("DRAW!")
+    answer = 'yes'
+    while answer.lower() == 'yes':
+      play(num)      
+      answer = input("Do you want to continue yes/no  ")   
+      
+
+find_num()  
