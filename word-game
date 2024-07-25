@@ -1,0 +1,44 @@
+import random
+from wordslist import words as list
+
+def display(rword, guessed_letters):
+    display_word = "" 
+    for letter in rword:
+        if letter in guessed_letters:
+            display_word += letter  
+        else:
+            display_word += "-" 
+    print(display_word)
+    return display_word
+
+def find_word():
+    print("I am thinking of 5-letter word. Can you guess the word? ")
+    guessed_letters = set()
+    attempts = 0
+    rword = random.choice(list)
+    while True:
+        guess = display(rword, guessed_letters)
+        letter = input("Write the letter: ").lower()
+        attempts += 1
+        if len(guessed_letters)>0:
+            print(f'Used letters: {sorted(guessed_letters)}') 
+        
+        if letter in guessed_letters:
+            print("You already tried that letter. Write another one.")
+            continue
+        elif letter in rword:
+            print(f"There is a letter {letter} in word")
+        else:
+            print(f"There is not a letter {letter} in word")
+        guessed_letters.add(letter)
+        attempts += 1
+        
+        if rword == guess:
+            print(f"Congrats! You found the word {rword}")
+            print(f"You found the word '{rword.upper()}' with {attempts} attempts!")
+            break
+        else:
+            print()
+            
+    return guessed_letters, rword, attempts
+    
